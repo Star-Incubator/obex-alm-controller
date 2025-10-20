@@ -5,6 +5,8 @@ import "./ForkTestBase.t.sol";
 
 import { IMapleTokenLike } from "../../src/MainnetController.sol";
 
+import { console } from "forge-std/console.sol";
+
 interface IPermissionManagerLike {
     function admin() external view returns (address);
     function setLenderAllowlist(
@@ -42,8 +44,8 @@ contract MapleTestBase is ForkTestBase {
     uint256 SYRUP_TOTAL_ASSETS;
     uint256 SYRUP_TOTAL_SUPPLY;
 
-    bytes32 depositKey;
-    bytes32 redeemKey;
+    bytes32 public depositKey;
+    bytes32 public redeemKey;
 
     function setUp() override public {
         super.setUp();
@@ -357,5 +359,18 @@ contract MainnetControllerMapleE2ETests is MapleTestBase {
 
         assertEq(usdc.balanceOf(address(syrup)),    usdcPoolBal - withdrawAssets);
         assertEq(usdc.balanceOf(address(almProxy)), withdrawAssets);
+    }
+}
+
+
+
+contract MapleSelectorsTests is MapleTestBase {
+
+    function test_mapleSelectors() external {
+        // console.logBytes32(redeemKey);
+        // console.logBytes32(depositKey);
+        assertEq(redeemKey,  0x64e6fd9d694640eebeeefc7b5abe32ef09bbabaa3d4e60221461d05a9577dc57, "Redeem Key Mismatch");
+        assertEq(depositKey, 0x99a69e57b2f387f999d6adff6eb2e707b59fdb54f06ca6211b4f20956e9bfe10, "Deposit Key Mismatch");
+       
     }
 }
