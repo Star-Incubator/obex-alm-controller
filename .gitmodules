@@ -46,3 +46,6 @@
 [submodule "lib/grove-address-registry"]
 	path = lib/grove-address-registry
 	url = https://github.com/grove-labs/grove-address-registry
+[submodule "lib/obex-address-registry"]
+	path = lib/obex-address-registry
+	url = https://github.com/obex-incubator/obex-address-registry
